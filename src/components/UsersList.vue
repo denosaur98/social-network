@@ -12,11 +12,11 @@ import { ref } from 'vue'
 import axios from 'axios'
 import UserPage from './UserPage.vue'
 
-const url = 'https://jsonplaceholder.typicode.com/users'
+const urlUsers = 'https://jsonplaceholder.typicode.com/users'
 const userNames = ref([])
 const selectedUser = ref(null);
 
-axios.get(url).then(response => userNames.value = response.data).catch(error => console.error(error))
+axios.get(urlUsers).then(response => userNames.value = response.data).catch(error => console.error(error))
 
 function selectUser(user) {
   selectedUser.value = user

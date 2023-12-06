@@ -1,15 +1,30 @@
 <template>
   <div class="user-page">
     <h1 class="user-name" v-if="selectedUser">{{ props.selectedUser.name }}</h1>
-    <BaseSwiper/>
+    <div class="albums-block">
+      <h1 class="albums-title">Альбомы:</h1>
+      <BaseSwiper :selectedUserId="selectedUser ? selectedUser.id : null" :userAlbums="userAlbums" />
+    </div>
   </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
-import BaseSwiper from './BaseSwiper.vue';
+import { defineProps, ref, onMounted } from 'vue'
+import axios from 'axios'
+import BaseSwiper from './BaseSwiper.vue'
 
 const props = defineProps(['selectedUser'])
+const urlAlbums = 'https://jsonplaceholder.typicode.com/albums'
+const userAlbums = ref([])
+
+onMounted(async () => {
+  try {
+    const response = await axios.get(urlAlbums)
+    userAlbums.value = response.data
+  } catch (error) {
+    console.error(error)
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -25,6 +40,14 @@ const props = defineProps(['selectedUser'])
   .user-name {
     margin: 0;
     font-size: 20px;
+  }
+  .albums-block {
+    position: absolute;
+    margin-top: 30px;
+    .albums-title {
+      color: rgb(153, 0, 0);
+      font-size: 25px;
+    }
   }
 }
 </style>
