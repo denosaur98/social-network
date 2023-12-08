@@ -7,7 +7,7 @@
     loop="true"
     class="swiper"
   >
-    <swiper-slide class="slide" v-for="(album, index) in filteredAlbums" :key="index">{{ album.title }}</swiper-slide>
+    <swiper-slide class="slide" v-for="(item, index) in filteredItems" :key="index">{{ item.title }}</swiper-slide>
   </swiper>
 </template>
 
@@ -20,11 +20,11 @@ export default {
     Swiper,
     SwiperSlide
   },
-  props: ['userAlbums', 'selectedUserId'],
+  props: ['userItems', 'selectedUserId', 'itemType'],
   computed: {
-    filteredAlbums() {
+    filteredItems() {
       if (!this.selectedUserId) return []
-      return this.userAlbums.filter(album => album.userId === this.selectedUserId)
+      return this.userItems.filter(item => item.userId === this.selectedUserId)
     }
   },
   setup() {

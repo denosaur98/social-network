@@ -1,9 +1,13 @@
 <template>
   <div class="user-page">
-    <h1 class="user-name" v-if="selectedUser">{{ props.selectedUser.name }}</h1>
+    <h1 class="user-name" v-if="selectedUser"><span class="item-title">Пользователь:</span> {{ props.selectedUser.name }}</h1>
     <div class="albums-block">
-      <h1 class="albums-title">Альбомы:</h1>
-      <BaseSwiper :selectedUserId="selectedUser ? selectedUser.id : null" :userAlbums="userAlbums" />
+      <h1 class="item-title">Альбомы:</h1>
+      <BaseSwiper :selectedUserId="selectedUser ? selectedUser.id : null" :userItems="userAlbums" itemType="album" />
+    </div>
+    <div class="posts-block">
+      <h1 class="item-title">Посты:</h1>
+      <BaseSwiper :selectedUserId="selectedUser ? selectedUser.id : null" :userItems="userPosts" itemType="post" />
     </div>
   </div>
 </template>
@@ -15,17 +19,24 @@ import BaseSwiper from './BaseSwiper.vue'
 
 const props = defineProps(['selectedUser'])
 const urlAlbums = 'https://jsonplaceholder.typicode.com/albums'
+const urlPosts = 'https://jsonplaceholder.typicode.com/posts'
 const userAlbums = ref([])
+const userPosts = ref([])
 
-onMounted(async () => {
+onMounted(async() => {
   try {
-    const response = await axios.get(urlAlbums)
-    userAlbums.value = response.data
+    const [albumsResponse, postsResponse] = await Promise.all([
+      axios.get(urlAlbums),
+      axios.get(urlPosts)
+    ])
+    userAlbums.value = albumsResponse.data
+    userPosts.value = postsResponse.data
   } catch (error) {
     console.error(error)
   }
 })
 </script>
+
 
 <style lang="scss" scoped>
 .user-page {
@@ -39,15 +50,19 @@ onMounted(async () => {
   font-family: 'Montserrat';
   .user-name {
     margin: 0;
-    font-size: 20px;
+    font-size: 25px;
   }
   .albums-block {
     position: absolute;
     margin-top: 30px;
-    .albums-title {
-      color: rgb(153, 0, 0);
-      font-size: 25px;
-    }
+  }
+  .posts-block {
+    position: absolute;
+    margin-top: 230px;
+  }
+  .item-title {
+    color: rgb(153, 0, 0);
+    font-size: 25px;
   }
 }
 </style>
