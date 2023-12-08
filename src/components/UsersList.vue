@@ -9,12 +9,14 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import axios from 'axios'
 import UserPage from './UserPage.vue'
 
 const urlUsers = 'https://jsonplaceholder.typicode.com/users'
 const userNames = ref([])
 const selectedUser = ref(null)
+const router = useRouter()
 
 axios.get(urlUsers)
 .then(response => {
@@ -27,6 +29,7 @@ axios.get(urlUsers)
 
 function selectUser(user) {
   selectedUser.value = user
+  router.push({ name: 'UserPage', params: { username: user.username.toLowerCase() }})
 }
 </script>
 

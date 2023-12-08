@@ -37,7 +37,6 @@ onMounted(async() => {
 })
 </script>
 
-
 <style lang="scss" scoped>
 .user-page {
   display: flex;
