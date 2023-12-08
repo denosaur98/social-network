@@ -5,10 +5,10 @@ const routes = [
     path: '/:username',
     name: 'UserPage',
     component: UserPage
-  },
+  }
 ]
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/social-network/'),
   routes
 })
 export default router
