@@ -47,11 +47,12 @@ export default {
   position: absolute;
   width: 865px;
   .slide {
+    cursor: pointer;
     padding: 5px;
     border: 1px solid #000;
     border-radius: 5px;
     width: 269.6px !important;
-    min-height: 60px;
+    min-height: 80px;
   }
 }
 </style>  

@@ -1,7 +1,11 @@
 <template>
-  <div class="users-list">
+  <div class="users-list" @click="closeDropdown">
     <div class="users-panel">
-      <p class="user-item" v-for="userName in userNames" :key="userName.id" @click="selectUser(userName)">{{ userName.name }}</p>
+      <p class="user-item" v-for="userName in userNames" :key="userName.id" @click="toggleDropdown(userName, $event)">{{ userName.name }}</p>
+      <div v-if="dropdown" class="dropdown-menu" :style="dropdownStyle">
+        <a href="#" class="dropdown-item">Перейти к альбомам</a>
+        <a href="#" class="dropdown-item">Перейти к постам</a>
+      </div>
     </div>
     <UserPage :selectedUser="selectedUser"/>
   </div>
@@ -13,10 +17,15 @@ import { useRouter } from 'vue-router'
 import axios from 'axios'
 import UserPage from './UserPage.vue'
 
+const router = useRouter()
 const urlUsers = 'https://jsonplaceholder.typicode.com/users'
 const userNames = ref([])
 const selectedUser = ref(null)
-const router = useRouter()
+const dropdown = ref(false)
+const dropdownStyle = ref({
+  top: '0',
+  left: '0'
+})
 
 axios.get(urlUsers)
 .then(response => {
@@ -27,9 +36,29 @@ axios.get(urlUsers)
 })
 .catch(error => console.error(error))
 
-function selectUser(user) {
-  selectedUser.value = user
-  router.push({ name: 'UserPage', params: { username: user.username.toLowerCase() }})
+function toggleDropdown(user, event) {
+  if (dropdown.value && selectedUser.value.id === user.id) {
+    closeDropdown()
+  } else {
+    closeDropdown()
+    selectedUser.value = user
+    router.push({ name: 'UserPage', params: { username: user.username.toLowerCase() }})
+    dropdown.value = true
+    updateDropdownPosition(event)
+    event.stopPropagation()
+  }
+}
+
+function updateDropdownPosition(event) {
+  if(event.target) {
+    const rect = event.target.getBoundingClientRect()
+    dropdownStyle.value.top = rect.bottom + 'px'
+    dropdownStyle.value.left = rect.left + 'px'
+  }
+}
+
+function closeDropdown() {
+  dropdown.value = false
 }
 </script>
 
@@ -56,8 +85,32 @@ function selectUser(user) {
       border-radius: 5px;
       margin: 10px;
       &:hover {
-
         box-shadow: 1px 3px 7px 1px #000;
+      }
+    }
+    .dropdown-menu {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      z-index: 1;
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: 1px 3px 7px 1px #000;
+      padding: 10px;
+      gap: 10px;
+      margin-top: 3px;
+      .dropdown-item {
+        cursor: pointer;
+        font-weight: 600;
+        margin: 0px;
+        font-family: 'Montserrat';
+        text-decoration: none;
+        color: #000;
+        &:hover {
+          text-decoration: underline;
+          text-decoration-thickness: 2px;
+          text-underline-offset: 4px;
+        }
       }
     }
   }
