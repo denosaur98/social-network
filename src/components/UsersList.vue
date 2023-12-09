@@ -1,10 +1,10 @@
 <template>
   <div class="users-list" @click="closeDropdown">
     <div class="users-panel">
-      <p class="user-item" v-for="userName in userNames" :key="userName.id" @click="toggleDropdown(userName, $event)">{{ userName.name }}</p>
-      <div v-if="dropdown" class="dropdown-menu" :style="dropdownStyle">
-        <a href="#" class="dropdown-item">Перейти к альбомам</a>
-        <a href="#" class="dropdown-item">Перейти к постам</a>
+      <p class="user-item" v-for="userName in userNames" :key="userName.id" @click="toggleDropdown(userName)">{{ userName.name }}</p>
+      <div v-if="dropdown" class="dropdown-menu" :style="dropdownStyle" @click.stop>
+        <a href="#" class="dropdown-item" @click="goToAlbums">Перейти к альбомам</a>
+        <a href="#" class="dropdown-item" @click="goToPosts">Перейти к постам</a>
       </div>
     </div>
     <UserPage :selectedUser="selectedUser"/>
@@ -36,14 +36,13 @@ axios.get(urlUsers)
 })
 .catch(error => console.error(error))
 
-function toggleDropdown(user, event) {
+function toggleDropdown(user) {
   if (dropdown.value && selectedUser.value.id === user.id) {
     closeDropdown()
   } else {
     closeDropdown()
     selectedUser.value = user
-    router.push({ name: 'UserPage', params: { username: user.username.toLowerCase() }})
-    dropdown.value = true
+    dropdown.value = !dropdown.value
     updateDropdownPosition(event)
     event.stopPropagation()
   }
@@ -59,6 +58,16 @@ function updateDropdownPosition(event) {
 
 function closeDropdown() {
   dropdown.value = false
+}
+
+function goToPosts() {
+  closeDropdown()
+  router.push({ name: 'UserPosts', params: { username: selectedUser.value.username.toLowerCase() }})
+}
+
+function goToAlbums() {
+  closeDropdown()
+  router.push({ name: 'UserAlbums', params: { username: selectedUser.value.username.toLowerCase() }})
 }
 </script>
 
