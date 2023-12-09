@@ -21,7 +21,7 @@ const props = defineProps(['userId', 'username'])
 const store = useStore()
 const userPosts = ref([])
 
-onMounted(async () => {
+onMounted(async() => {
   await store.dispatch('fetchUserPosts')
   userPosts.value = store.getters.getUserPosts.filter(post => post.userId === parseInt(props.userId))
 })
@@ -48,12 +48,14 @@ onMounted(async () => {
     display: flex;
     flex-direction: column;
     width: 100%;
+    gap: 10px;
     .user-name {
       display: flex;
       align-items: flex-start;
       font-family: 'Montserrat';
       font-size: 25px;
       margin: 0;
+      margin-bottom: 15px;
       .item-title {
         color: rgb(153, 0, 0);
         font-size: 25px;
@@ -61,11 +63,18 @@ onMounted(async () => {
       }
     }
     .post-item {
+      border: 1px solid #000;
+      border-radius: 5px;
+      padding: 10px;
       .post-title {
-        
+        font-family: 'Montserrat';
+        font-size: 20px;
+        margin: 0;
       }
       .post-body {
-        
+        font-family: 'Montserrat';
+        font-size: 15px;
+        margin-bottom: 0;
       }
     }
   }
