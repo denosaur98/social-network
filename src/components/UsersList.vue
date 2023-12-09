@@ -4,7 +4,7 @@
       <p class="user-item" v-for="userName in userNames" :key="userName.id" @click="toggleDropdown(userName)">{{ userName.name }}</p>
       <div v-if="dropdown" class="dropdown-menu" :style="dropdownStyle" @click.stop>
         <a href="#" class="dropdown-item" @click="goToAlbums">Перейти к альбомам</a>
-        <a href="#" class="dropdown-item" @click="goToPosts">Перейти к постам</a>
+        <a href="#" class="dropdown-item" @click="goToPosts(selectedUser.id)">Перейти к постам</a>
       </div>
     </div>
     <UserPage :selectedUser="selectedUser"/>
@@ -28,13 +28,13 @@ const dropdownStyle = ref({
 })
 
 axios.get(urlUsers)
-.then(response => {
-  userNames.value = response.data
-  if (userNames.value.length > 0) {
-    selectedUser.value = userNames.value[0]
-  }
-})
-.catch(error => console.error(error))
+  .then(response => {
+    userNames.value = response.data
+    if (userNames.value.length > 0) {
+      selectedUser.value = userNames.value[0]
+    }
+  })
+  .catch(error => console.error(error))
 
 function toggleDropdown(user) {
   if (dropdown.value && selectedUser.value.id === user.id) {
@@ -62,12 +62,13 @@ function closeDropdown() {
 
 function goToPosts() {
   closeDropdown()
-  router.push({ name: 'UserPosts', params: { username: selectedUser.value.username.toLowerCase() }})
+  router.push({ name: 'UserPosts', params: { userId: selectedUser.value.id, username: selectedUser.value.name.toLowerCase() }})
 }
+
 
 function goToAlbums() {
   closeDropdown()
-  router.push({ name: 'UserAlbums', params: { username: selectedUser.value.username.toLowerCase() }})
+  router.push({ name: 'UserAlbums', params: { username: selectedUser.value.name.toLowerCase() }})
 }
 </script>
 
