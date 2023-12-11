@@ -58,10 +58,7 @@ onMounted(async() => {
   }
   .posts-block {
     position: absolute;
-    margin-top: 230px;
-    @media screen and (max-width: 840px) {
-      margin-top: 250px;
-    }
+    margin-top: 270px;
   }
   .item-title {
     color: rgb(153, 0, 0);

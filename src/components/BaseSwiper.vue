@@ -78,7 +78,7 @@ export default {
     box-sizing: border-box;
     .user-item {
       margin: 0;
-      min-height: 120px;
+      min-height: 140px;
       overflow: hidden;
       .item-title {
         margin: 0;
