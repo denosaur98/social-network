@@ -28,13 +28,13 @@ const dropdownStyle = ref({
 })
 
 axios.get(urlUsers)
-  .then(response => {
-    userNames.value = response.data
-    if (userNames.value.length > 0) {
-      selectedUser.value = userNames.value[0]
-    }
-  })
-  .catch(error => console.error(error))
+.then(response => {
+  userNames.value = response.data
+  if (userNames.value.length > 0) {
+    selectedUser.value = userNames.value[0]
+  }
+})
+.catch(error => console.error(error))
 
 function toggleDropdown(user) {
   if (dropdown.value && selectedUser.value.id === user.id) {
@@ -74,7 +74,7 @@ function goToAlbums() {
 <style lang="scss" scoped>
 .users-list {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 20px;
   gap: 50px;
   .users-panel {

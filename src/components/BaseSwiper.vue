@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/css'
 
 export default {
   components: {
@@ -29,21 +29,21 @@ export default {
   computed: {
     itemsToDisplay() {
       if (this.itemType === 'albums') {
-        return this.userItems;
+        return this.userItems
       } else {
-        return this.selectedUserId ? this.filteredItems : this.userItems;
+        return this.selectedUserId ? this.filteredItems : this.userItems
       }
     },
     filteredItems() {
-      if (!this.selectedUserId) return [];
-      return this.userItems.filter(item => item.userId === this.selectedUserId);
+      if (!this.selectedUserId) return []
+      return this.userItems.filter(item => item.userId === this.selectedUserId)
     },
     swiperClass() {
-      return this.itemType === 'albums' ? 'swiper-albums' : 'swiper-user-page';
+      return this.itemType === 'albums' ? 'swiper-albums' : 'swiper-user-page'
     },
     swiperStyles() {
       return {
-        spaceBetween: this.itemType === 'albums' ? 140 : 10
+        spaceBetween: this.itemType === 'albums' ? 120 : 10
       }
     }
   },
@@ -71,8 +71,8 @@ export default {
     padding: 5px;
     border: 1px solid #000;
     border-radius: 5px;
-    width: 269.6px !important;
-    min-height: 80px;
+    min-height: 100px;
+    box-sizing: border-box;
     .user-item {
       margin: 0;
       min-height: 120px;
@@ -88,7 +88,7 @@ export default {
   margin: 0;
   .slide {
     cursor: pointer;
-    width: 300px !important;
+    box-sizing: border-box;
     min-height: 80px;
     .user-item {
       border: 1px solid #000;
