@@ -5,11 +5,7 @@
     </a>
     <div class="albums-block">
       <h1 class="user-name"><span class="item-title">Пользователь:</span> {{ props.username }}</h1>
-      <div v-for="album in userAlbums" :key="album.id" class="album-item">
-        <h1 class="album-title">{{ album.title }}</h1>
-        <img :src="album.url" class="album-image">
-      </div>
-    <BaseSwiper/>
+      <BaseSwiper :userItems="userAlbums" :selectedUserId="parseInt(props.userId, 10)" itemType="albums"/>
     </div>
   </div>
 </template>
@@ -52,6 +48,7 @@ onMounted(async () => {
   .albums-block {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     width: 100%;
     gap: 10px;
     .user-name {
@@ -67,23 +64,7 @@ onMounted(async () => {
         margin-right: 10px;
       }
     }
-    .album-item {
-      border: 1px solid #000;
-      border-radius: 5px;
-      padding: 10px;
-      width: 300px;
-      .album-title {
-        font-family: 'Montserrat';
-        font-size: 20px;
-        width: 300px;
-        margin: 0;
-        margin-bottom: 10px;
-      }
-      .album-image {
-        width: 300px;
-        height: 300px;
-      }
-    }
+    
   }
 }
 </style>
