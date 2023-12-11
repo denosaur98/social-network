@@ -41,10 +41,8 @@ onMounted(async() => {
 .user-page {
   display: flex;
   flex-direction: column;
-  border: 1px solid #000;
   border-radius: 5px;
   width: 100%;
-  box-shadow: 1px 3px 7px 1px #000;
   padding: 15px;
   font-family: 'Montserrat';
   .user-name {
@@ -54,10 +52,16 @@ onMounted(async() => {
   .albums-block {
     position: absolute;
     margin-top: 30px;
+    @media screen and (max-width: 840px) {
+      margin-top: 50px;
+    }
   }
   .posts-block {
     position: absolute;
     margin-top: 230px;
+    @media screen and (max-width: 840px) {
+      margin-top: 250px;
+    }
   }
   .item-title {
     color: rgb(153, 0, 0);

@@ -77,6 +77,12 @@ function goToAlbums() {
   justify-content: center;
   padding: 20px;
   gap: 50px;
+  @media screen and (max-width: 1300px) {
+    gap: 20px;
+  }
+  @media screen and (max-width: 575px) {
+    flex-direction: column;
+  }
   .users-panel {
     display: block;
     width: 500px;
@@ -85,6 +91,9 @@ function goToAlbums() {
     border: 1px solid #000;
     border-radius: 5px;
     box-shadow: 1px 3px 7px 1px #000;
+    @media screen and (max-width: 575px) {
+      width: auto;
+    }
     .user-item {
       cursor: pointer;
       font-family: 'Montserrat';

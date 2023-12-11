@@ -1,5 +1,5 @@
 <template>
-  <div class="user-posts">
+  <div class="user-albums">
     <a href="/" class="link">
       <font-awesome-icon :icon="['fas', 'chevron-left']" class="icon-arrow"/>
     </a>
@@ -26,14 +26,15 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-.user-posts {
+.user-albums {
   display: flex;
   align-items: flex-start;
   padding: 20px;
   gap: 50px;
-  border: 1px solid #000;
-  box-shadow: 1px 3px 7px 1px #000;
   border-radius: 5px;
+  @media screen and (max-width: 520px) {
+    gap: 10px;
+  }
   .link {
     color: #000;
     .icon-arrow {
@@ -58,10 +59,16 @@ onMounted(async () => {
       font-size: 25px;
       margin: 0;
       margin-bottom: 15px;
+      @media screen and (max-width: 520px) {
+        font-size: 15px;
+      }
       .item-title {
         color: rgb(153, 0, 0);
         font-size: 25px;
         margin-right: 10px;
+        @media screen and (max-width: 520px) {
+          font-size: 15px;
+        }
       }
     }
     

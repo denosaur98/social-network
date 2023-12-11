@@ -65,7 +65,10 @@ export default {
 <style lang="scss" scoped>
 .swiper-user-page {
   position: absolute;
-  width: 865px;
+  width: 63.32vw;
+  @media screen and (max-width: 575px) {
+    width: 85vw;
+  }
   .slide {
     cursor: pointer;
     padding: 5px;
@@ -76,9 +79,16 @@ export default {
     .user-item {
       margin: 0;
       min-height: 120px;
+      overflow: hidden;
       .item-title {
         margin: 0;
         font-size: 20px;
+        @media screen and (max-width: 820px) {
+          font-size: 13px;
+        }
+        @media screen and (max-width: 430px) {
+          font-size: 10px;
+        }
       }
     }
   }
@@ -95,6 +105,9 @@ export default {
       border-radius: 5px;
       padding: 10px;
       width: 300px;
+      @media screen and (max-width: 575px) {
+        width: 250px;
+      }
       .item-title {
         font-family: 'Montserrat';
         font-size: 20px;
@@ -102,10 +115,17 @@ export default {
         height: 80px;
         margin: 0;
         margin-bottom: 10px;
+        @media screen and (max-width: 575px) {
+          width: 250px;
+        }
       }
       .album-image {
         width: 300px;
         height: 300px;
+        @media screen and (max-width: 575px) {
+          width: 250px;
+          height: 250px;
+        }
       }
     }
   }
