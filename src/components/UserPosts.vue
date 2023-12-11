@@ -43,6 +43,9 @@ onMounted(async() => {
       width: 30px;
       height: 30px;
     }
+    &:hover {
+      opacity: 0.5;
+    }
   }
   .posts-block {
     display: flex;

@@ -68,7 +68,7 @@ function goToPosts() {
 
 function goToAlbums() {
   closeDropdown()
-  router.push({ name: 'UserAlbums', params: { username: selectedUser.value.name.toLowerCase() }})
+  router.push({ name: 'UserAlbums', params: { userId: selectedUser.value.id, username: selectedUser.value.name.toLowerCase() }})
 }
 </script>
 

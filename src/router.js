@@ -16,10 +16,10 @@ const routes = [
     props: (route) => ({ userId: route.params.userId, username: route.params.username })
   },  
   {
-    path: '/albums/:username',
+    path: '/albums/:userId/:username',
     name: 'UserAlbums',
     component: UserAlbums,
-    props: (route) => ({ username: route.params.username })
+    props: (route) => ({ userId: route.params.userId, username: route.params.username })
   }
 ]
 
